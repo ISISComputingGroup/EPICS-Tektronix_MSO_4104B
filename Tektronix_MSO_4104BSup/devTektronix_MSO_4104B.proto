@@ -1,5 +1,5 @@
 Terminator = '\r\n';
-ReplyTimeout = 2000;
+ReplyTimeout = 10000;
 
 getIDN {
     out "*IDN?";
@@ -13,7 +13,7 @@ setFORMAT {
 	out "SAVe:IMAGe:FILEFormat PNG";
 }
 
-getSCREEN {
-	#ask scope to start sending screen capture
-	out "HARDCopy START";
-}	
+#getSCREEN {
+#	#ask scope to start sending screen capture
+#	out "HARDCopy START";
+#}	

@@ -10,5 +10,6 @@ DIRS := configure
 DIRS += $(wildcard *[Ss]up)
 DIRS += $(wildcard *[Aa]pp)
 DIRS += $(wildcard ioc[Bb]oot)
+DIRS := $(DIRS) $(filter-out $(DIRS), iocs)
 
 include $(TOP)/configure/RULES_TOP
