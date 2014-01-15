@@ -19,11 +19,12 @@ record(ao, "$(P):FORMAT")
     field(DESC, "Set file format")
     field(DTYP, "stream")
     field(OUT,  "@devTektronix_MSO_4104B.proto setFORMAT $(PORT)")
+	field(FLNK, "$(P):SCREEN")
 }
 
-#record(ai, "$(P):SCREEN")
-#{
-#    field(DESC, "Get screen capture")
-#    field(DTYP, "stream")
-#    field(OUT,  "@devTektronix_MSO_4104B.proto getSCREEN $(PORT)")
-#}
+record(stringin, "$(P):SCREEN")
+{
+    field(DESC, "Get screen capture")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getSCREEN $(PORT)")
+}

@@ -19,7 +19,7 @@ drvAsynIPPortConfigure ("IP", "130.246.50.156:4000")
 
 ## Load record instances
 dbLoadRecords("$(TOP)/../../db/devTektronix_MSO_4104B.db","P=$(IOCNAME), PORT=IP")
-dbLoadRecords("$(IOCSTATS_DB)","IOC=$(IOCNAME)")
+#dbLoadRecords("$(IOCSTATS_DB)","IOC=$(IOCNAME)")
 
 cd ${TOP}/iocBoot/${IOC}
 iocInit
