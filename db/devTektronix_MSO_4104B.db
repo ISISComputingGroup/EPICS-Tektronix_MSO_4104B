@@ -54,16 +54,25 @@ record(stringin, "$(P):YUNIT_CH1")
     field(DESC, "get y unit of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(1) $(PORT)")
-	field(FLNK, "$(P):DATA_CH1")
+	field(FLNK, "$(P):ACALC_DATA_CH1")
 }
 
-record(acalcout, "$(P):DATA_CH1")
+record(acalcout, "$(P):ACALC_DATA_CH1")
 {
 	field(NELM, "10000")
     field(DESC,  "scale data points")
     field(INAA,  "$(P):RAWDATA_CH1")
 	field(INPA,  "$(P):YMULT_CH1")
 	field(CALC,  "AA * A")
+	field(FLNK, "$(P):DATA_CH1")
+}
+
+record(waveform, "$(P):DATA_CH1")
+{
+	field(NELM, "10000")
+    field(DESC,  "scale data points")
+	field(INP,  "$(P):ACALC_DATA_CH1.AVAL")
+	field(FTVL, "DOUBLE")
 }
 
 record(waveform, "$(P):RAWDATA_CH2")
