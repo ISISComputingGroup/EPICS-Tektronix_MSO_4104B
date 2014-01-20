@@ -21,13 +21,16 @@ Tektronix_MSO_4104B_DBD += asyn.dbd
 Tektronix_MSO_4104B_DBD += drvAsynSerialPort.dbd
 Tektronix_MSO_4104B_DBD += drvAsynIPPort.dbd
 Tektronix_MSO_4104B_DBD += devIocStats.dbd
+Tektronix_MSO_4104B_DBD += drvVxi11.dbd
+Tektronix_MSO_4104B_DBD += aCalcoutRecord.dbd calcSupport.dbd incrementor.dbd
 
 # Add all the support libraries needed by this IOC
-Tektronix_MSO_4104B_LIBS += stream pcre
+Tektronix_MSO_4104B_LIBS += stream pcre calc
 Tektronix_MSO_4104B_LIBS += asyn devIocStats
+Tektronix_MSO_4104B_LIBS_WIN32 += oncrpc
 
 # Tektronix_MSO_4104B_registerRecordDeviceDriver.cpp derives from Tektronix_MSO_4104B.dbd
-Tektronix_MSO_4104B_SRCS += Tektronix_MSO_4104B_registerRecordDeviceDriver.cpp
+Tektronix_MSO_4104B_SRCS += Tektronix_MSO_4104B_registerRecordDeviceDriver.cpp incrementor.c
 
 # Build the main IOC entry point on workstation OSs.
 Tektronix_MSO_4104B_SRCS_DEFAULT += Tektronix_MSO_4104BMain.cpp

@@ -14,17 +14,231 @@ record(stringin, "$(P):IDN")
     field(PINI, "YES")
 }
 
-record(ao, "$(P):FORMAT")
+record(waveform, "$(P):RAWDATA_CH1")
 {
-    field(DESC, "Set file format")
+    field(SCAN, "5 second")
+    field(DESC, "Get data points")
     field(DTYP, "stream")
-    field(OUT,  "@devTektronix_MSO_4104B.proto setFORMAT $(PORT)")
-	field(FLNK, "$(P):SCREEN")
+	field(NELM, "10000")
+	field(FTVL, "LONG")
+    field(INP,  "@devTektronix_MSO_4104B.proto getDATA(1) $(PORT)")
+	field(FLNK, "$(P):XINC_CH1")
 }
 
-record(stringin, "$(P):SCREEN")
+record(ai, "$(P):XINC_CH1")
 {
-    field(DESC, "Get screen capture")
+    field(DESC, "get x increment of plot")
     field(DTYP, "stream")
-    field(INP,  "@devTektronix_MSO_4104B.proto getSCREEN $(PORT)")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXINC(1) $(PORT)")
+	field(FLNK, "$(P):YMULT_CH1")
+}
+
+record(ai, "$(P):YMULT_CH1")
+{
+    field(DESC, "get y multiplier of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(1) $(PORT)")
+	field(FLNK, "$(P):XUNIT_CH1")
+}
+
+record(stringin, "$(P):XUNIT_CH1")
+{
+    field(DESC, "get x unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(1) $(PORT)")
+	field(FLNK, "$(P):YUNIT_CH1")
+}
+
+record(stringin, "$(P):YUNIT_CH1")
+{
+    field(DESC, "get y unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(1) $(PORT)")
+	field(FLNK, "$(P):DATA_CH1")
+}
+
+record(acalcout, "$(P):DATA_CH1")
+{
+	field(NELM, "10000")
+    field(DESC,  "scale data points")
+    field(INAA,  "$(P):RAWDATA_CH1")
+	field(INPA,  "$(P):YMULT_CH1")
+	field(CALC,  "AA * A")
+}
+
+record(waveform, "$(P):RAWDATA_CH2")
+{
+    field(SCAN, "5 second")
+    field(DESC, "Get data points")
+    field(DTYP, "stream")
+	field(NELM, "10000")
+	field(FTVL, "LONG")
+    field(INP,  "@devTektronix_MSO_4104B.proto getDATA(2) $(PORT)")
+	field(FLNK, "$(P):XINC_CH2")
+}
+
+record(ai, "$(P):XINC_CH2")
+{
+    field(DESC, "get x increment of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXINC(2) $(PORT)")
+	field(FLNK, "$(P):YMULT_CH2")
+}
+
+record(ai, "$(P):YMULT_CH2")
+{
+    field(DESC, "get y multiplier of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(2) $(PORT)")
+	field(FLNK, "$(P):XUNIT_CH2")
+}
+
+record(stringin, "$(P):XUNIT_CH2")
+{
+    field(DESC, "get x unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(2) $(PORT)")
+	field(FLNK, "$(P):YUNIT_CH2")
+}
+
+record(stringin, "$(P):YUNIT_CH2")
+{
+    field(DESC, "get y unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(2) $(PORT)")
+	field(FLNK, "$(P):DATA_CH2")
+}
+
+record(acalcout, "$(P):DATA_CH2")
+{
+	field(NELM, "10000")
+    field(DESC,  "scale data points")
+    field(INAA,  "$(P):RAWDATA_CH2")
+	field(INPA,  "$(P):YMULT_CH2")
+	field(CALC,  "AA * A")
+}
+
+record(waveform, "$(P):RAWDATA_CH3")
+{
+    field(SCAN, "5 second")
+    field(DESC, "Get data points")
+    field(DTYP, "stream")
+	field(NELM, "10000")
+	field(FTVL, "LONG")
+    field(INP,  "@devTektronix_MSO_4104B.proto getDATA(3) $(PORT)")
+	field(FLNK, "$(P):XINC_CH3")
+}
+
+record(ai, "$(P):XINC_CH3")
+{
+    field(DESC, "get x increment of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXINC(3) $(PORT)")
+	field(FLNK, "$(P):YMULT_CH3")
+}
+
+record(ai, "$(P):YMULT_CH3")
+{
+    field(DESC, "get y multiplier of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(3) $(PORT)")
+	field(FLNK, "$(P):XUNIT_CH3")
+}
+
+record(stringin, "$(P):XUNIT_CH3")
+{
+    field(DESC, "get x unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(3) $(PORT)")
+	field(FLNK, "$(P):YUNIT_CH3")
+}
+
+record(stringin, "$(P):YUNIT_CH3")
+{
+    field(DESC, "get y unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(3) $(PORT)")
+	field(FLNK, "$(P):DATA_CH3")
+}
+
+record(acalcout, "$(P):DATA_CH3")
+{
+	field(NELM, "10000")
+    field(DESC,  "scale data points")
+    field(INAA,  "$(P):RAWDATA_CH3")
+	field(INPA,  "$(P):YMULT_CH3")
+	field(CALC,  "AA * A")
+}
+
+record(waveform, "$(P):RAWDATA_CH4")
+{
+    field(SCAN, "5 second")
+    field(DESC, "Get data points")
+    field(DTYP, "stream")
+	field(NELM, "10000")
+	field(FTVL, "LONG")
+    field(INP,  "@devTektronix_MSO_4104B.proto getDATA(4) $(PORT)")
+	field(FLNK, "$(P):XINC_CH4")
+}
+
+record(ai, "$(P):XINC_CH4")
+{
+    field(DESC, "get x increment of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXINC(4) $(PORT)")
+	field(FLNK, "$(P):YMULT_CH4")
+}
+
+record(ai, "$(P):YMULT_CH4")
+{
+    field(DESC, "get y multiplier of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(4) $(PORT)")
+	field(FLNK, "$(P):XUNIT_CH4")
+}
+
+record(stringin, "$(P):XUNIT_CH4")
+{
+    field(DESC, "get x unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(4) $(PORT)")
+	field(FLNK, "$(P):YUNIT_CH4")
+}
+
+record(stringin, "$(P):YUNIT_CH4")
+{
+    field(DESC, "get y unit of plot")
+    field(DTYP, "stream")
+    field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(4) $(PORT)")
+	field(FLNK, "$(P):DATA_CH4")
+}
+
+record(acalcout, "$(P):DATA_CH4")
+{
+	field(NELM, "10000")
+    field(DESC,  "scale data points")
+    field(INAA,  "$(P):RAWDATA_CH4")
+	field(INPA,  "$(P):YMULT_CH4")
+	field(CALC,  "AA * A")
+}
+
+record(aSub,"$(P):ASUB") 
+{
+    field(SCAN,"1 second")
+    field(SNAM,"incrementor")
+    field(FTA, "DOUBLE")
+	field(INPA, "$(P):XINC_CH1")
+    field(OUTA, "$(P):OUT")
+    field(FTVA, "DOUBLE")
+    field(NOVA, "10000")
+	field(NEVA, "10000")
+    field(FLNK,"$(P):OUT")
+}
+
+record(waveform, "$(P):OUT")
+{
+    field(INP, "$(P):ASUB.VALA")
+    field(DTYP, "Soft Channel")
+    field(NELM, "10000")
+    field(FTVL, "DOUBLE")
 }
