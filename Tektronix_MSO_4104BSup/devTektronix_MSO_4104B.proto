@@ -36,8 +36,8 @@ getYUNIT {
 	ExtraInput = Ignore;
 }
 
-getDATA {
-	#ask scope for plot data points
+getYDATA {
+	#ask scope for y data points
 	out ":VERBOSE 0;:HEADER 0;:DATa:SOUrce CH\$1;:DATa:STARt 1;:DATa:STOP 10000;:DATa:ENCdg ASCIi;:DATa:WIDth 1;:CURVe?";
 	separator=",";
 	in "%d";
