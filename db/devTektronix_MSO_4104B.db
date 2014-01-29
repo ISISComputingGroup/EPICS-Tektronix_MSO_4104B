@@ -1,18 +1,53 @@
 #
+# waveform, acalcout and asub records not changed #
+#
+
+record(bo, "$(P):SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+}
+
+record(bo, "$(P):DISABLE") 
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "0")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+#
 # Simple YDATAbase and stream protocol file for basic SCPI (IEEE488.2) commands
 #
 
+#
+# waveform, acalcout and asub records not changed #
+#
 
-#
+
+# General oscilloscope commands
+
 # Short and long form of identification string
-#
+
 record(stringin,"$(P):IDN")
 {
     field(DESC, "SCPI identification string")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getIDN(39) $(PORT)")
     field(PINI, "YES")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:IDN")
+    field(SDIS, "$(P):DISABLE")
 }
+
+# Specific Channel commands
+
+# Records for calculated Y data disabled as only raw data plotted in CSS
+# (as well as forward-links pointing to those records)
 
 record(waveform,"$(P):RAWYDATA_CH1")
 {
@@ -31,6 +66,9 @@ record(ai, "$(P):XINC_CH1")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXINC(1) $(PORT)")
 	field(FLNK, "$(P):YMULT_CH1")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XINC_CH1")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):YMULT_CH1")
@@ -39,6 +77,9 @@ record(ai, "$(P):YMULT_CH1")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(1) $(PORT)")
 	field(FLNK, "$(P):XUNIT_CH1")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YMULT_CH1")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin,"$(P):XUNIT_CH1")
@@ -47,6 +88,9 @@ record(stringin,"$(P):XUNIT_CH1")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(1) $(PORT)")
 	field(FLNK, "$(P):YUNIT_CH1")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XUNIT_CH1")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin,"$(P):YUNIT_CH1")
@@ -54,26 +98,32 @@ record(stringin,"$(P):YUNIT_CH1")
     field(DESC, "get y unit of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(1) $(PORT)")
-	field(FLNK, "$(P):ACALC_YDATA_CH1")
+#	field(FLNK, "$(P):ACALC_YDATA_CH1")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YUNIT_CH1")
+    field(SDIS, "$(P):DISABLE")
 }
 
-record(acalcout,"$(P):ACALC_YDATA_CH1")
-{
-	field(NELM, "10000")
-    field(DESC, "scale y data points")
-    field(INAA, "$(P):RAWYDATA_CH1")
-	field(INPA, "$(P):YMULT_CH1")
-	field(CALC, "AA * A")
-	field(FLNK, "$(P):YDATA_CH1")
-}
+#record(acalcout,"$(P):ACALC_YDATA_CH1")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scale y data points")
+#   field(INAA, "$(P):RAWYDATA_CH1")
+#	field(INPA, "$(P):YMULT_CH1")
+#	field(CALC, "AA * A")
+#	field(FLNK, "$(P):YDATA_CH1")
+#}
 
-record(waveform, "$(P):YDATA_CH1")
-{
-	field(NELM, "10000")
-    field(DESC, "scaled y data points")
-	field(INP,  "$(P):ACALC_YDATA_CH1.AVAL")
-	field(FTVL, "DOUBLE")
-}
+#record(waveform, "$(P):YDATA_CH1")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scaled y data points")
+#	field(INP,  "$(P):ACALC_YDATA_CH1.AVAL")
+#	field(FTVL, "DOUBLE")
+#	field(SIML, "$(P):SIM")
+#   field(SIOL, "$(P):SIM:YDATA_CH1")
+#   field(SDIS, "$(P):DISABLE")
+#}
 
 record(waveform,"$(P):RAWYDATA_CH2")
 {
@@ -92,6 +142,9 @@ record(ai, "$(P):XINC_CH2")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXINC(2) $(PORT)")
 	field(FLNK, "$(P):YMULT_CH2")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):XINC_CH2")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):YMULT_CH2")
@@ -100,6 +153,9 @@ record(ai, "$(P):YMULT_CH2")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(2) $(PORT)")
 	field(FLNK, "$(P):XUNIT_CH2")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YMULT_CH2")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin,"$(P):XUNIT_CH2")
@@ -108,6 +164,9 @@ record(stringin,"$(P):XUNIT_CH2")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(2) $(PORT)")
 	field(FLNK, "$(P):YUNIT_CH2")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XUNIT_CH2")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin,"$(P):YUNIT_CH2")
@@ -115,26 +174,29 @@ record(stringin,"$(P):YUNIT_CH2")
     field(DESC, "get y unit of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(2) $(PORT)")
-	field(FLNK, "$(P):ACALC_YDATA_CH2")
+#	field(FLNK, "$(P):ACALC_YDATA_CH2")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YUNIT_CH2")
+    field(SDIS, "$(P):DISABLE")
 }
 
-record(acalcout,"$(P):ACALC_YDATA_CH2")
-{
-	field(NELM, "10000")
-    field(DESC, "scale y data points")
-    field(INAA, "$(P):RAWYDATA_CH2")
-	field(INPA, "$(P):YMULT_CH2")
-	field(CALC, "AA * A")
-	field(FLNK, "$(P):YDATA_CH2")
-}
+#record(acalcout,"$(P):ACALC_YDATA_CH2")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scale y data points")
+#   field(INAA, "$(P):RAWYDATA_CH2")
+#	field(INPA, "$(P):YMULT_CH2")
+#	field(CALC, "AA * A")
+#	field(FLNK, "$(P):YDATA_CH2")
+#}
 
-record(waveform, "$(P):YDATA_CH2")
-{
-	field(NELM, "10000")
-    field(DESC, "scaled y data points")
-	field(INP,  "$(P):ACALC_YDATA_CH2.AVAL")
-	field(FTVL, "DOUBLE")
-}
+#record(waveform, "$(P):YDATA_CH2")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scaled y data points")
+#	field(INP,  "$(P):ACALC_YDATA_CH2.AVAL")
+#	field(FTVL, "DOUBLE")
+#}
 
 record(waveform, "$(P):RAWYDATA_CH3")
 {
@@ -153,6 +215,9 @@ record(ai, "$(P):XINC_CH3")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXINC(3) $(PORT)")
 	field(FLNK, "$(P):YMULT_CH3")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XINC_CH3")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):YMULT_CH3")
@@ -161,6 +226,9 @@ record(ai, "$(P):YMULT_CH3")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(3) $(PORT)")
 	field(FLNK, "$(P):XUNIT_CH3")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YMULT_CH3")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin, "$(P):XUNIT_CH3")
@@ -169,6 +237,9 @@ record(stringin, "$(P):XUNIT_CH3")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(3) $(PORT)")
 	field(FLNK, "$(P):YUNIT_CH3")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XUNIT_CH3")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin, "$(P):YUNIT_CH3")
@@ -176,26 +247,29 @@ record(stringin, "$(P):YUNIT_CH3")
     field(DESC, "get y unit of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(3) $(PORT)")
-	field(FLNK, "$(P):ACALC_YDATA_CH3")
+#	field(FLNK, "$(P):ACALC_YDATA_CH3")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YUNIT_CH3")
+    field(SDIS, "$(P):DISABLE")
 }
 
-record(acalcout,"$(P):ACALC_YDATA_CH3")
-{
-	field(NELM, "10000")
-    field(DESC, "scale y data points")
-    field(INAA, "$(P):RAWYDATA_CH3")
-	field(INPA, "$(P):YMULT_CH3")
-	field(CALC, "AA * A")
-	field(FLNK, "$(P):YDATA_CH3")
-}
+#record(acalcout,"$(P):ACALC_YDATA_CH3")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scale y data points")
+#   field(INAA, "$(P):RAWYDATA_CH3")
+#	field(INPA, "$(P):YMULT_CH3")
+#	field(CALC, "AA * A")
+#	field(FLNK, "$(P):YDATA_CH3")
+#}
 
-record(waveform, "$(P):YDATA_CH3")
-{
-	field(NELM, "10000")
-    field(DESC, "scaled y data points")
-	field(INP,  "$(P):ACALC_YDATA_CH3.AVAL")
-	field(FTVL, "DOUBLE")
-}
+#record(waveform, "$(P):YDATA_CH3")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scaled y data points")
+#	field(INP,  "$(P):ACALC_YDATA_CH3.AVAL")
+#	field(FTVL, "DOUBLE")
+#}
 
 record(waveform, "$(P):RAWYDATA_CH4")
 {
@@ -214,6 +288,9 @@ record(ai, "$(P):XINC_CH4")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXINC(4) $(PORT)")
 	field(FLNK, "$(P):YMULT_CH4")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XINC_CH4")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):YMULT_CH4")
@@ -222,6 +299,9 @@ record(ai, "$(P):YMULT_CH4")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYMULT(4) $(PORT)")
 	field(FLNK, "$(P):XUNIT_CH4")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YMULT_CH4")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin, "$(P):XUNIT_CH4")
@@ -230,6 +310,9 @@ record(stringin, "$(P):XUNIT_CH4")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXUNIT(4) $(PORT)")
 	field(FLNK, "$(P):YUNIT_CH4")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:XUNIT_CH4")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(stringin, "$(P):YUNIT_CH4")
@@ -237,26 +320,29 @@ record(stringin, "$(P):YUNIT_CH4")
     field(DESC, "get y unit of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getYUNIT(4) $(PORT)")
-	field(FLNK, "$(P):ACALC_YDATA_CH4")
+#	field(FLNK, "$(P):ACALC_YDATA_CH4")
+	field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:YUNIT_CH4")
+    field(SDIS, "$(P):DISABLE")
 }
 
-record(acalcout,"$(P):ACALC_YDATA_CH4")
-{
-	field(NELM, "10000")
-    field(DESC, "scale y data points")
-    field(INAA, "$(P):RAWYDATA_CH4")
-	field(INPA, "$(P):YMULT_CH4")
-	field(CALC, "AA * A")
-	field(FLNK, "$(P):YDATA_CH4")
-}
+#record(acalcout,"$(P):ACALC_YDATA_CH4")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scale y data points")
+#   field(INAA, "$(P):RAWYDATA_CH4")
+#	field(INPA, "$(P):YMULT_CH4")
+#	field(CALC, "AA * A")
+#	field(FLNK, "$(P):YDATA_CH4")
+#}
 
-record(waveform, "$(P):YDATA_CH4")
-{
-	field(NELM, "10000")
-    field(DESC, "scaled y data points")
-	field(INP,  "$(P):ACALC_YDATA_CH4.AVAL")
-	field(FTVL, "DOUBLE")
-}
+#record(waveform, "$(P):YDATA_CH4")
+#{
+#	field(NELM, "10000")
+#   field(DESC, "scaled y data points")
+#	field(INP,  "$(P):ACALC_YDATA_CH4.AVAL")
+#	field(FTVL, "DOUBLE")
+#}
 
 # The following two records generate values for the x-axis
 
@@ -279,4 +365,106 @@ record(waveform, "$(P):XDATA")
     field(DTYP, "Soft Channel")
     field(NELM, "10000")
     field(FTVL, "DOUBLE")
+}
+
+### SIMULATION RECORDS ###
+
+#
+# waveform, acalcout and asub records not changed #
+#
+
+record(ai, "$(P):SIM:XINC_CH1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:YMULT_CH1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:XUNIT_CH1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:YUNIT_CH1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:XINC_CH2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:YMULT_CH2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:XUNIT_CH2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:YUNIT_CH2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:XINC_CH3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:YMULT_CH3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:XUNIT_CH3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:YUNIT_CH3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:XINC_CH4")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(P):SIM:YMULT_CH4")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:XUNIT_CH4")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(stringin, "$(P):SIM:YUNIT_CH4")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
