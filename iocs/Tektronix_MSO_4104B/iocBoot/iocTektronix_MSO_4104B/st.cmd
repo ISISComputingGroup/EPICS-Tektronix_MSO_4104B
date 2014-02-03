@@ -17,7 +17,7 @@ dbLoadDatabase "dbd/Tektronix_MSO_4104B.dbd"
 Tektronix_MSO_4104B_registerRecordDeviceDriver pdbbase
 
 #drvAsynIPPortConfigure ("IP", "130.246.50.156:4000")
-vxi11Configure("IP", "130.246.50.95", 0, 0.0,"inst0", 0, 0)
+vxi11Configure("IP", "130.246.50.172", 0, 0.0,"inst0", 0, 0)
 
 ## Load record instances
 dbLoadRecords("$(TOP)/../../db/devTektronix_MSO_4104B.db","P=$(IOCNAME), PORT=IP")

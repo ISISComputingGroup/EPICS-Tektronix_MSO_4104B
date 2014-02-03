@@ -753,7 +753,7 @@ $(pv_value)</tooltip>
       <format_type>1</format_type>
       <precision_from_pv>false</precision_from_pv>
       <transparent>false</transparent>
-      <pv_name>NDW1033:dpk62:TEKMSO4104B:YMULT_CH1</pv_name>
+      <pv_name>$(P)TEKMSO4104B:YMULT_CH1</pv_name>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
@@ -804,7 +804,7 @@ $(pv_value)</tooltip>
       <format_type>1</format_type>
       <precision_from_pv>false</precision_from_pv>
       <transparent>false</transparent>
-      <pv_name>NDW1033:dpk62:TEKMSO4104B:YMULT_CH2</pv_name>
+      <pv_name>$(P)TEKMSO4104B:YMULT_CH2</pv_name>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
@@ -855,7 +855,7 @@ $(pv_value)</tooltip>
       <format_type>1</format_type>
       <precision_from_pv>false</precision_from_pv>
       <transparent>false</transparent>
-      <pv_name>NDW1033:dpk62:TEKMSO4104B:YMULT_CH3</pv_name>
+      <pv_name>$(P)TEKMSO4104B:YMULT_CH3</pv_name>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>
@@ -906,7 +906,7 @@ $(pv_value)</tooltip>
       <format_type>0</format_type>
       <precision_from_pv>false</precision_from_pv>
       <transparent>false</transparent>
-      <pv_name>NDW1033:dpk62:TEKMSO4104B:YMULT_CH4</pv_name>
+      <pv_name>$(P)TEKMSO4104B:YMULT_CH4</pv_name>
       <background_color>
         <color red="255" green="255" blue="255" />
       </background_color>

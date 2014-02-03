@@ -12,10 +12,11 @@
 #SNCSEQ=_SNCSEQ_
 
 # Asyn
-ASYN=$(SUPPORT)/asyn/4-18
+ASYN=$(SUPPORT)/asyn/4-22
 STREAMDEVICE=$(SUPPORT)/StreamDevice
 DEVIOCSTATS=$(SUPPORT)/devIocStats/3-1-11
 PCRE=$(SUPPORT)/pcre
+SSCAN=$(SUPPORT)/sscan/2-8
 
 # EPICS_BASE usually appears last so other apps can preempt definitions
 EPICS_BASE=c:/ISISEPICS/base/3-14-12-2
