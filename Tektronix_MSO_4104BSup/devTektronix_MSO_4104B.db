@@ -8,6 +8,7 @@ record(bo, "$(P):SIM")
     field(DTYP, "Soft Channel")
     field(ZNAM, "NO")
     field(ONAM, "YES")
+    field(FLNK, "$(P):IDN")
 }
 
 record(bo, "$(P):DISABLE") 
@@ -144,9 +145,10 @@ record(ai, "$(P):XINC_CH2")
     field(DESC, "get x increment of plot")
     field(DTYP, "stream")
     field(INP,  "@devTektronix_MSO_4104B.proto getXINC(2) $(PORT)")
+    field(PREC, "3")
 	field(FLNK, "$(P):YMULT_CH2")
 	field(SIML, "$(P):SIM")
-    field(SIOL, "$(P):XINC_CH2")
+    field(SIOL, "$(P):SIM:XINC_CH2")
     field(SDIS, "$(P):DISABLE")
 }
 
