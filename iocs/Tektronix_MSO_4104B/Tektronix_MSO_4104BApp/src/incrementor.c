@@ -10,13 +10,6 @@ static long incrementor(aSubRecord *prec) {
     prec->pact = 1;
     
     a = (double *)prec->a;
-	//printf("a = %f", *a);
-    
-    //Could potentially be an array, so must code for that
-    free(prec->vala);
-	prec->vala = malloc(prec->nova * sizeof(double));
-    
-    //printf("noa = %d", prec->noa);
     
     for(i=0; i < prec->nova; ++i)
     {
