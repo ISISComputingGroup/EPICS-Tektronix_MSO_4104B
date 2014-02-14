@@ -138,6 +138,9 @@ record(waveform,"$(P):RAWYDATA_CH2")
 	field(FTVL, "LONG")
     field(INP,  "@devTektronix_MSO_4104B.proto getYDATA(2) $(PORT)")
 	field(FLNK, "$(P):XINC_CH2")
+    field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:RAWYDATA_CH2")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):XINC_CH2")
@@ -212,6 +215,9 @@ record(waveform, "$(P):RAWYDATA_CH3")
 	field(FTVL, "LONG")
     field(INP,  "@devTektronix_MSO_4104B.proto getYDATA(3) $(PORT)")
 	field(FLNK, "$(P):XINC_CH3")
+    field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:RAWYDATA_CH3")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):XINC_CH3")
@@ -285,6 +291,9 @@ record(waveform, "$(P):RAWYDATA_CH4")
 	field(FTVL, "LONG")
     field(INP,  "@devTektronix_MSO_4104B.proto getYDATA(4) $(PORT)")
 	field(FLNK, "$(P):XINC_CH4")
+    field(SIML, "$(P):SIM")
+    field(SIOL, "$(P):SIM:RAWYDATA_CH4")
+    field(SDIS, "$(P):DISABLE")
 }
 
 record(ai, "$(P):XINC_CH4")
